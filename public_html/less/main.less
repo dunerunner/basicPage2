@@ -1,0 +1,398 @@
+/*Reset css*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+/* Variables */
+@mainFont: Arial;
+@secondaryFont: Tahoma;
+@mainFontSize:12;
+
+@bodyColor1:#d4c9d6;
+@bodyColor2:#fff;
+
+@contactTextColor1:#8f7396;
+@contactTextColor2:#7e5e86;
+@contactTextColor3:#666;
+
+@navBorderColor:#cdc0d0;
+@navShadowColor:#704c78;
+
+@submenuBorderColor:#6e4976;
+@submenuBgColor:#94799a;
+
+@sidemenuHoverColor:#7f5e86;
+
+@buttonBorderColor:#c9bbcb;
+
+@contentPicBorderColor:#2cbdca;
+
+/* Mixins */
+
+.clearfix() {
+    &:after{
+        clear: both;
+        content: "";
+        display: block;
+    }
+}
+.gradient(@params) {
+    background: -moz-linear-gradient(@params);
+    background: -webkit-linear-gradient(@params);
+    background: -o-linear-gradient(@params);
+    background: -ms-linear-gradient(@params);
+    background: linear-gradient(@params);
+}
+.shadowText() {
+    text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.5);
+}
+/*Page layout*/
+body {
+    font:unit(@mainFontSize, px)/unit((2 + @mainFontSize), px) @mainFont;
+    background: @bodyColor1;
+    @bodyGrad:@bodyColor1 0%, @bodyColor2 30%, @bodyColor2 70%, @bodyColor1 100%;
+    .gradient(@bodyGrad);
+}
+.b {
+    &-site-wrap {
+        overflow:hidden;
+        position: relative;
+        height: auto;
+        width: 960px;
+        margin: 0 auto;
+    }
+    &-header {
+        display:table;
+        width:100%;
+        height: 155px;
+    }
+    &-logo {
+        display:table-cell;
+        width:50%;
+        box-sizing: border-box;
+        padding: 0 0 0 55px;
+        vertical-align:middle;
+        font: bold 1.2em/1em @secondaryFont;
+        color:@bodyColor2;
+    }
+    &-address {
+        display:table-cell;
+        width:22%;
+        vertical-align:middle;
+        &__text {
+            display: block;
+            color: @contactTextColor3;
+            font: 1em/1.4em @mainFont;
+        }
+    }
+    &-phone {
+        display:table-cell;
+        width:28%;
+        box-sizing:border-box;
+        vertical-align:middle;
+        &_footer {
+            vertical-align: top;
+            padding: 20px 30px 0 0 ;
+            width: 35%;
+        }
+        &__number {
+            float: left;
+            display: block;
+            height: 30px;
+            padding: 0 0 0 38px;
+            font: bold 2.1em @mainFont;
+            color: @contactTextColor1;
+            background: url(../img/Phone.png) no-repeat 0 4px;
+            .shadowText();
+            &_bold {
+                font: bold 1.2em Arial;
+                color: contactTextColor2;
+            }
+        }
+    }
+    &-nav {
+        margin: 0 0 30px 0;
+        border:3px solid @navBorderColor;
+        border-radius: 22px;
+        background: url(../img/MenuFont1.jpg) repeat-x;
+        .clearfix();
+        &__element {
+            position: relative;
+            display:inline-block;
+            float: left;
+            &:first-child a{
+                border-left: none;
+                border-radius: 22px 0 0 22px;
+            }
+            &:last-child {
+                border-right: 1px solid @navBorderColor;
+            }
+            &:hover > ul{
+                display: block;
+            }
+        }
+        &-link {
+            display: block;
+            border-left: 1px solid @navBorderColor;
+            border-right: 1px solid @navShadowColor;;
+            padding: 0 20px;
+            font: bold 1em/3.7em @mainFont;
+            text-decoration: none;
+            text-shadow: 0 -1px 2px @navShadowColor;
+            color: @bodyColor2;
+            &:hover {
+                background: url(../img/MenuFont2.jpg) repeat-x;
+            }
+        }
+        &-sub {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0; 
+            border: 1px solid @submenuBorderColor;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+            background: @submenuBgColor;
+            &-link {
+                display: block;
+                padding: 0 0 0 12px;
+                white-space: nowrap;
+                font: 1em/1.5em @mainFont;
+                text-shadow: 0 -1px 2px @navShadowColor;
+                background: url(../img/arrows.png) no-repeat 0 -31px;
+                color:@bodyColor2;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    &-sidebar {
+        display:inline-block;
+        float:left;
+        width: 245px;
+        margin:0 0 105px 0;
+    }
+    &-sidemenu {
+        margin: 0 0 30px 0;
+        & > li:last-child a{ 
+            border: none;
+        }
+    }
+    &-side-link, &-side-sublink {
+        display: block;
+        font: 1.2em/2.5em @mainFont;
+        border-bottom: 1px dotted @contactTextColor3;
+        padding: 0 0 0 15px;
+        color: @contactTextColor3;
+        text-decoration: none;
+        background: url(../img/arrows.png) no-repeat 0 14px;
+        &:hover {
+            font-weight: bold;
+            color: @sidemenuHoverColor;
+        }
+    }
+    &-side-sublink {
+        padding: 0 0 0 30px;
+        background-position: 15px 14px;
+    }
+    &-comment {
+        margin: 0 35px 0 0;
+        &__header {
+            margin: 0 0 25px 0;
+            padding: 0 0 0 10px;
+            font: 2em @secondaryFont;
+            color: @sidemenuHoverColor;
+        }
+        &-form {
+            &__label {
+                display: block;
+                padding: 0 0 0 10px;
+                font: 1em/2em @secondaryFont;
+                color: @contactTextColor3;
+            }
+            &__input {
+                box-sizing: border-box;
+                width: 100%;
+                height: 20px;
+                border: 1px solid @contactTextColor3;
+                border-radius: 10px;
+                padding: 0 10px;
+            }
+            &__textarea {
+                width: 100%;
+                height: 90px;
+                box-sizing: border-box;
+                border: 1px solid @contactTextColor3;
+                border-radius: 10px;
+                padding: 3px 10px;
+                font: 1.1em @mainFont;
+                resize: none;
+            }
+            &__button {
+                display: block;
+                height: 40px;
+                width: 110px;
+                margin: 15px auto;
+                border: 3px solid @buttonBorderColor;
+                border-radius: 20px;
+                font: bold 1em @secondaryFont;
+                text-shadow: 0 -1px 2px @navShadowColor;
+                color: @bodyColor2;
+                background: url(../img/ButtonFont.jpg) repeat-x;
+                cursor:pointer;
+            }
+        }
+    }
+    &-content {
+        display:inline-block;
+        float:left;
+        width:715px;
+        margin:0 0 105px 0;
+        box-sizing:border-box;
+        padding: 0 0 0 55px;
+        &-headpic {
+            height: 154px;
+            border: 2px solid @contentPicBorderColor;
+            border-radius: 5px;
+            background: url(../img/Banner.png) no-repeat; 
+        }
+    }
+    &-article {
+        display:inline-block;
+        float:left;
+        width:400px;
+        &__header {
+            text-align: left;
+            font: 2em/3em @secondaryFont;
+            color: @sidemenuHoverColor; 
+        }
+        &__text {
+            margin: 0 0 25px 0;
+            font: 1em/1.5em @mainFont;
+            text-align: left;
+            color: @contactTextColor3;
+        }
+    }
+    &-news {
+        display:inline-block;
+        float:left;
+        width:220px;
+        margin:0 0 0 40px;
+        &__header {
+            text-align: left;
+            font: 2em/3em @secondaryFont;
+            color: @sidemenuHoverColor;
+        }
+        &__showall {
+            padding: 0 0 0 10px;
+            font: bold 1em @mainFont;
+            color: @submenuBorderColor;
+            background: url(../img/arrow_d_m2.png) no-repeat 0 5px;
+            &:hover {
+                text-decoration:none;
+            }
+        }
+        &-list {
+            &__element {
+                border-bottom: 1px dotted @contactTextColor3;
+                margin: 0 0 15px 0;
+            }
+        }
+        &-item {
+            display: block;
+            text-decoration: none;
+            color: @submenuBorderColor;
+            &__header {
+                display: block;
+                margin: 0 0 10px 0;
+                text-decoration: none;
+                font: bold 1em @mainFont;
+            }
+            &__text {
+                display: block;
+                font: 1em @mainFont;
+                text-decoration: underline;
+                margin: 0 0 17px 0;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+    &-footer {
+        display: table;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 105px;
+        border-top: 1px dotted @contactTextColor3; 
+    }
+    &-copyright {
+        display: table-cell;
+        width: 25%;
+        box-sizing: border-box;
+        padding: 20px 0 0 0;
+        vertical-align: top;
+        &__text {
+            display: block;
+            color: @contactTextColor3;
+            font: 1em/1.4em @mainFont;
+        }
+    }
+    &-counter {
+        display: table-cell;
+        width: 15%;
+        &__maincounter {
+            display: block;
+            height: 31px;
+            width: 88px;
+            margin: 20px auto 0 auto;
+        }
+    }
+    &-footer-logo {
+        display: table-cell;
+        width: 22%;
+        background: url(../img/footer_logo.png) no-repeat 70% 20px;
+    }
+}
